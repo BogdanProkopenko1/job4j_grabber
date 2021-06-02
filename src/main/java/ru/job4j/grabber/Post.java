@@ -1,17 +1,22 @@
 package ru.job4j.grabber;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Post {
 
-    private Date createdDate;
+    private LocalDateTime createdDate;
     private String author;
+
+    public String getLink() {
+        return link;
+    }
+
     private String link;
     private String msg;
     private int views;
     private int answers;
 
-    public Post(Date createdDate, String author, String link, String msg, int views, int answers) {
+    public Post(LocalDateTime createdDate, String author, String link, String msg, int views, int answers) {
         this.createdDate = createdDate;
         this.author = author;
         this.link = link;
