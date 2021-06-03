@@ -6,11 +6,6 @@ public class Post {
 
     private LocalDateTime createdDate;
     private String author;
-
-    public String getLink() {
-        return link;
-    }
-
     private String link;
     private String msg;
     private int views;
@@ -24,6 +19,8 @@ public class Post {
         this.views = views;
         this.answers = answers;
     }
+
+    public Post() {}
 
     @Override
     public String toString() {
