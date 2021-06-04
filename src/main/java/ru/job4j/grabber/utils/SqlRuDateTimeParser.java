@@ -9,25 +9,25 @@ import java.util.Map;
 public class SqlRuDateTimeParser implements DateTimeParser {
 
     private Map<String, Integer> getMap() {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("янв", 1);
-        map.put("фев", 2);
-        map.put("мар", 3);
-        map.put("апр", 4);
-        map.put("май", 5);
-        map.put("июн", 6);
-        map.put("июл", 7);
-        map.put("авг", 8);
-        map.put("сен", 9);
-        map.put("окт", 10);
-        map.put("ноя", 11);
-        map.put("дек", 12);
-        return map;
+        final Map<String, Integer> MAP = new HashMap<>();
+        MAP.put("янв", 1);
+        MAP.put("фев", 2);
+        MAP.put("мар", 3);
+        MAP.put("апр", 4);
+        MAP.put("май", 5);
+        MAP.put("июн", 6);
+        MAP.put("июл", 7);
+        MAP.put("авг", 8);
+        MAP.put("сен", 9);
+        MAP.put("окт", 10);
+        MAP.put("ноя", 11);
+        MAP.put("дек", 12);
+        return MAP;
     }
 
     @Override
     public LocalDateTime parse(String parse) {
-        Map<String, Integer> months = getMap();
+        final Map<String, Integer> MONTHS = getMap();
         String[] fullTime = parse.split(", ");
         String[] time = fullTime[1].split(":");
         LocalTime localTime = LocalTime.of(Integer.parseInt(time[0]), Integer.parseInt(time[1]));
@@ -39,7 +39,7 @@ public class SqlRuDateTimeParser implements DateTimeParser {
         if (date.length == 3) {
             localDate = LocalDate.of(
                     Integer.parseInt("20" + date[2]),
-                    months.get(date[1]),
+                    MONTHS.get(date[1]),
                     Integer.parseInt(date[0])
             );
         }
