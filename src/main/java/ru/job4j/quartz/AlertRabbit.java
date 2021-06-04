@@ -7,11 +7,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import static org.quartz.JobBuilder.*;
@@ -24,6 +19,7 @@ public class AlertRabbit {
         Properties properties = new Properties();
         try (BufferedReader readProperties = new BufferedReader(new FileReader("rabbit.properties"))) {
             properties.load(readProperties);
+            readProperties.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -33,7 +29,6 @@ public class AlertRabbit {
                 properties.getProperty("rabbit.db-username"),
                 properties.getProperty("rabbit.db-password")
         )) {
-            List<Long> store = new ArrayList<>();
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
             JobDataMap data = new JobDataMap();
@@ -62,7 +57,6 @@ public class AlertRabbit {
         public void execute(JobExecutionContext context)  {
             System.out.println("Rabbit runs here ...");
             Connection cn = (Connection) context.getJobDetail().getJobDataMap().get("connection");
-            //store.add(System.currentTimeMillis());
             try (PreparedStatement statement =
                          cn.prepareStatement("insert into rabbit (created_date) values (?)")) {
                 Date date = new Date(System.currentTimeMillis());
