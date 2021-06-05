@@ -4,33 +4,27 @@ import java.time.LocalDateTime;
 
 public class Post {
 
+    private int id;
     private LocalDateTime createdDate;
-    private String author;
+    private String name;
+    private String text;
     private String link;
-    private String msg;
-    private int views;
-    private int answers;
 
-    public Post(LocalDateTime createdDate, String author, String link, String msg, int views, int answers) {
+    public Post(LocalDateTime createdDate, String author, String link, String msg) {
         this.createdDate = createdDate;
-        this.author = author;
-        this.link = link;
-        this.msg = msg;
-        this.views = views;
-        this.answers = answers;
+        this.name = author;
+        this.text = link;
+        this.link = msg;
     }
-
-    public Post() {}
 
     @Override
     public String toString() {
         return "Post{" +
-                "createdDate=" + createdDate +
-                ", author='" + author + '\'' +
+                "id=" + id +
+                ", createdDate=" + createdDate +
+                ", name='" + name + '\'' +
+                ", text='" + text + '\'' +
                 ", link='" + link + '\'' +
-                ", msg='" + msg + '\'' +
-                ", views=" + views +
-                ", answers=" + answers +
                 '}';
     }
 }

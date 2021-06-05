@@ -28,6 +28,7 @@ public class SqlRuDateTimeParser implements DateTimeParser {
     @Override
     public LocalDateTime parse(String parse) {
         final Map<String, Integer> MONTHS = getMap();
+        parse = parse.split(" \\[.*")[0];
         String[] fullTime = parse.split(", ");
         String[] time = fullTime[1].split(":");
         LocalTime localTime = LocalTime.of(Integer.parseInt(time[0]), Integer.parseInt(time[1]));
@@ -44,11 +45,5 @@ public class SqlRuDateTimeParser implements DateTimeParser {
             );
         }
         return LocalDateTime.of(localDate, localTime);
-    }
-
-    public static void main(String[] args) {
-        SqlRuDateTimeParser parser = new SqlRuDateTimeParser();
-        System.out.println(parser.parse("сегодня, 14:14"));
-        System.out.println(parser.parse("15 янв 17, 23:56"));
     }
 }
