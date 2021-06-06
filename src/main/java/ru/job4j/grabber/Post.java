@@ -1,6 +1,7 @@
 package ru.job4j.grabber;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Post {
 
@@ -41,6 +42,16 @@ public class Post {
 
     public String getLink() {
         return link;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Post)) return false;
+        Post post = (Post) o;
+        return  Objects.equals(getName(), post.getName()) &&
+                Objects.equals(getText(), post.getText()) &&
+                Objects.equals(getLink(), post.getLink());
     }
 
     @Override

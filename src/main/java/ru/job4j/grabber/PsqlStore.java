@@ -11,11 +11,11 @@ public class PsqlStore implements Store, AutoCloseable {
 
     public PsqlStore(Properties cfg) {
         try {
-            Class.forName(cfg.getProperty("rabbit.db-driver-class-name"));
+            Class.forName(cfg.getProperty("db.driver-class-name"));
             cnn = DriverManager.getConnection(
-                    cfg.getProperty("rabbit.db-url"),
-                    cfg.getProperty("rabbit.db-username"),
-                    cfg.getProperty("rabbit.db-password")
+                    cfg.getProperty("db.url"),
+                    cfg.getProperty("db.username"),
+                    cfg.getProperty("db.password")
                     );
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,13 +72,14 @@ public class PsqlStore implements Store, AutoCloseable {
             statement.setInt(1, Integer.parseInt(id));
             statement.execute();
             resultSet = statement.getResultSet();
-            resultSet.next();
-            post = new Post(
-                    resultSet.getTimestamp("created").toLocalDateTime(),
-                    resultSet.getString("name"),
-                    resultSet.getString("text"),
-                    resultSet.getString("link")
-            );
+            if (resultSet.next()) {
+                post = new Post(
+                        resultSet.getTimestamp("created").toLocalDateTime(),
+                        resultSet.getString("name"),
+                        resultSet.getString("text"),
+                        resultSet.getString("link")
+                );
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
