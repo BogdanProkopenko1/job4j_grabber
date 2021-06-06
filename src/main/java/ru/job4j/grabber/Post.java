@@ -17,6 +17,32 @@ public class Post {
         this.link = msg;
     }
 
+    public Post() {}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
