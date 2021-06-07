@@ -10,10 +10,6 @@ public class SqlRuDateTimeParser implements DateTimeParser {
 
     private static final Map<String, Integer> MONTHS = getMap();
 
-    public static Map<String, Integer> getMOHTHS() {
-        return MONTHS;
-    }
-
     private static Map<String, Integer> getMap() {
         Map<String, Integer> map = new HashMap<>();
         map.put("янв", 1);
@@ -45,7 +41,7 @@ public class SqlRuDateTimeParser implements DateTimeParser {
         if (date.length == 3) {
             localDate = LocalDate.of(
                     Integer.parseInt("20" + date[2]),
-                    getMOHTHS().get(date[1]),
+                    MONTHS.get(date[1]),
                     Integer.parseInt(date[0])
             );
         }
