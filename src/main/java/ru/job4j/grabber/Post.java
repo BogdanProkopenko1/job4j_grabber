@@ -11,14 +11,14 @@ public class Post {
     private String text;
     private String link;
 
-    public Post(LocalDateTime createdDate, String author, String link, String msg) {
+    public Post(LocalDateTime createdDate, String name, String text, String link) {
         this.createdDate = createdDate;
-        this.name = author;
-        this.text = link;
-        this.link = msg;
+        this.name = name;
+        this.text = text;
+        this.link = link;
     }
 
-    public Post() {}
+    public Post() { }
 
     public int getId() {
         return id;
@@ -46,22 +46,31 @@ public class Post {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Post)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Post)) {
+            return false;
+        }
         Post post = (Post) o;
-        return  Objects.equals(getName(), post.getName()) &&
-                Objects.equals(getText(), post.getText()) &&
-                Objects.equals(getLink(), post.getLink());
+        return  Objects.equals(getName(), post.getName())
+                && Objects.equals(getText(), post.getText())
+                && Objects.equals(getLink(), post.getLink());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCreatedDate(), getName(), getText(), getLink());
     }
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", createdDate=" + createdDate +
-                ", name='" + name + '\'' +
-                ", text='" + text + '\'' +
-                ", link='" + link + '\'' +
-                '}';
+        return "Post{"
+                + "id=" + id
+                + ", createdDate=" + createdDate
+                + ", name='" + name + '\''
+                + ", text='" + text + '\''
+                + ", link='" + link + '\''
+                + '}';
     }
 }
